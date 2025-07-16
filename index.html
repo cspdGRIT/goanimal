@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimalConnect - India's Premier Domestic Animal Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #8b5a3c 0%, #d2691e 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #8b5a3c 0%, #d2691e 50%, #ffd700 100%);
+            color: white;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #8b5a3c;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Animal Marketplace */
+        .marketplace {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #8b5a3c;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-select {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-select:hover {
+            border-color: #d2691e;
+        }
+
+        .filter-select.active {
+            background: #d2691e;
+            color: white;
+            border-color: #d2691e;
+        }
+
+        .animal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .animal-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .animal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #8b5a3c;
+        }
+
+        .animal-info {
+            padding: 1.5rem;
+        }
+
+        .animal-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #8b5a3c;
+            margin-bottom: 0.5rem;
+        }
+
+        .animal-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .animal-details {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .animal-location {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .animal-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .badge-verified {
+            background: #10b981;
+            color: white;
+        }
+
+        .badge-premium {
+            background: #ffd700;
+            color: #8b5a3c;
+        }
+
+        .badge-new {
+            background: #ff6b35;
+            color: white;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #d2691e, #ffd700);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #8b5a3c;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #8b5a3c;
+            margin-bottom: 1rem;
+        }
+
+        /* Onboarding Section */
+        .onboarding {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+
+        .onboarding-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .onboarding-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .onboarding-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .onboarding-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5a3c;
+            margin-bottom: 1rem;
+        }
+
+        .onboarding-benefits {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .onboarding-benefits li {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 3% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .contact-info {
+            background: #fff8dc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #d2691e;
+        }
+
+        .animal-detail-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: #8b5a3c;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 5rem 0;
+            background: white;
+            text-align: center;
+        }
+
+        .pricing-card {
+            background: #f8fafc;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            border: 3px solid #d2691e;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .price-description {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* Disclaimers */
+        .disclaimers {
+            padding: 3rem 0;
+            background: #8b5a3c;
+            color: white;
+        }
+
+        .disclaimer-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .onboarding-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .filter-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .animal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Search Bar */
+        .search-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #d2691e;
+        }
+
+        .search-btn {
+            padding: 0.8rem 2rem;
+            background: #d2691e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #8b5a3c;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #d2691e;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">🐄 AnimalConnect</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#marketplace">Marketplace</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#onboarding">Join Now</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>India's Premier Animal Marketplace</h1>
+            <p>Connect domestic animal sellers with buyers across India. From dairy cows to pet goats, find your perfect match with verified sellers nationwide.</p>
+            
+            <div class="cta-buttons">
+                <a href="#marketplace" class="btn btn-primary">Browse Animals</a>
+                <a href="#onboarding" class="btn btn-secondary">Start Selling</a>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">25,000+</div>
+                    <div class="stat-label">Active Listings</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Verified Sellers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">800+</div>
+                    <div class="stat-label">Cities & Villages</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">₹10</div>
+                    <div class="stat-label">Contact Fee Only</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animal Marketplace -->
+    <section id="marketplace" class="marketplace">
+        <div class="container">
+            <h2 class="section-title">Browse Premium Animals</h2>
+            
+            <div class="search-container">
+                <div class="search-form">
+                    <input type="text" class="search-input" placeholder="Search animals, breeds, locations...">
+                    <button class="search-btn">Search</button>
+                </div>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-select active" data-category="all">All Animals</button>
+                <button class="filter-select" data-category="dairy">Dairy Cattle</button>
+                <button class="filter-select" data-category="goats">Goats</button>
+                <button class="filter-select" data-category="buffaloes">Buffaloes</button>
+                <button class="filter-select" data-category="poultry">Poultry</button>
+                <button class="filter-select" data-category="pets">Pets</button>
+            </div>
+
+            <div class="animal-grid" id="animalGrid">
+                <!-- Animal cards will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose AnimalConnect?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Verified Sellers</h3>
+                    <p class="feature-description">All sellers undergo thorough verification process with document checks and phone verification for your safety.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Smart Matching</h3>
+                    <p class="feature-description">Advanced algorithms match you with animals based on your preferences, location, and budget requirements.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3 class="feature-title">Instant Alerts</h3>
+                    <p class="feature-description">Get notifications when new animals matching your criteria are listed in your preferred locations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Transparent Pricing</h3>
+                    <p class="feature-description">No hidden fees. Pay only ₹10 to unlock contact details and connect directly with sellers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3 class="feature-title">Reviews & Ratings</h3>
+                    <p class="feature-description">Read genuine reviews from previous buyers to make informed decisions about sellers and animals.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Quick Transactions</h3>
+                    <p class="feature-description">Streamlined process from browsing to contact - find and connect with sellers in minutes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How AnimalConnect Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Browse & Search</h3>
+                    <p>Explore our extensive collection of animals. Use filters to find exactly what you're looking for.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">View Details</h3>
+                    <p>See detailed information, photos, health records, and seller ratings for each animal.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Pay ₹10 & Connect</h3>
+                    <p>Pay a small fee to unlock verified contact details and connect directly with the seller.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Negotiate & Buy</h3>
+                    <p>Discuss terms, arrange visits, and complete your purchase directly with the seller.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding Section -->
+    <section id="onboarding" class="onboarding">
+        <div class="container">
+            <h2 class="section-title">Join AnimalConnect Today</h2>
+            <div class="onboarding-types">
+                <div class="onboarding-card">
+                    <div class="onboarding-icon">🛒</div>
+                    <h3 class="onboarding-title">For Buyers</h3>
+                    <ul class="onboarding-benefits">
+                        <li>✅ Browse 25,000+ verified animal listings</li>
+                        <li>✅ Advanced search and filter options</li>
+                        <li>✅ Get instant alerts for new listings</li>
+                        <li>✅ Read reviews and ratings</li>
+                        <li>✅ Direct contact with sellers</li>
+                        <li>✅ Safe and secure transactions</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="showOnboardingModal('buyer')">Join as Buyer</button>
+                </div>
+                <div class="onboarding-card">
+                    <div class="onboarding-icon">🏪</div>
+                    <h3 class="onboarding-title">For Sellers</h3>
+                    <ul class="onboarding-benefits">
+                        <li>✅ List unlimited animals for free</li>
+                        <li>✅ Reach buyers across India</li>
+                        <li>✅ Professional listing management</li>
+                        <li>✅ Verified buyer connections</li>
+                        <li>✅ Performance analytics</li>
+                        <li>✅ 24/7 customer support</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="showOnboardingModal('seller')">Join as Seller</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <div class="pricing-card">
+                <div class="price">₹10</div>
+                <p class="price-description">Per contact unlock - No subscriptions, no hidden fees</p>
+                <ul style="text-align: left; margin: 2rem 0;">
+                    <li>✅ Verified seller contact details</li>
+                    <li>✅ WhatsApp direct messaging</li>
+                    <li>✅ Phone number access</li>
+                    <li>✅ Best time to contact</li>
+                    <li>✅ Seller's preferred communication</li>
+                    <li>✅ 7-day contact guarantee</li>
+                </ul>
+                <p style="color: #666; font-size: 0.9rem; margin-top: 1rem;">
+                    <strong>Always Free:</strong> Browsing, listing animals, search, alerts, reviews, basic messaging
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animal Detail Modal -->
+    <div id="animalModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="animalDetails">
+                <!-- Animal details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Onboarding Modal -->
+    <div id="onboardingModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="onboardingForm">
+                <!-- Onboarding form will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Disclaimers -->
+    <section class="disclaimers">
+        <div class="container">
+            <h3 style="margin-bottom: 1rem; color: #ffd700;">Important Disclaimers</h3>
+            <div class="disclaimer-text">
+                <p><strong>AnimalConnect is a connection platform only.</strong> We facilitate introductions between animal sellers and buyers but do not participate in actual transactions. All negotiations, health checks, documentation, and payment processes are to be handled directly between parties post-connection.</p>
+                
+                <p style="margin-top: 1rem;"><strong>Animal Health & Verification:</strong> Users are responsible for verifying animal health, vaccination records, breeding history, and conducting proper veterinary checks before any transaction. We recommend consulting veterinarians and conducting physical inspection.</p>
+                
+                <p style="margin-top: 1rem;"><strong>No Transaction Guarantee:</strong> Platform fees are for contact access only. We do not guarantee successful transactions, animal health, fair pricing, or dispute resolution. All deals are subject to mutual agreement between parties.</p>
+                
+                <p style="margin-top: 1rem;"><strong>Legal Compliance:</strong> Users must comply with local animal welfare laws, transportation regulations, health department guidelines, and state-specific livestock transfer rules. Consult legal and veterinary professionals for compliance.</p>
+                
+                <p style="margin-top: 1rem;"><strong>Animal Welfare:</strong> We strongly advocate for ethical treatment of animals. Report any suspicious or illegal activities to local authorities and our platform immediately.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AnimalConnect</h3>
+                    <p>India's most trusted platform for domestic animal trading. Connecting responsible sellers with caring buyers nationwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#marketplace">Browse Animals</a></p>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#onboarding">Join Now</a></p>
+                    <p><a href="#pricing">Pricing</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <p><a href="mailto:help@animalconnect.in">help@animalconnect.in</a></p>
+                    <p><a href="tel:+911800247365">+91 1800 247 365</a></p>
+                    <p>24/7 Customer Support</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <p><a href="#">Privacy Policy</a></p>
+                    <p><a href="#">Terms of Service</a></p>
+                    <p><a href="#">Animal Welfare Policy</a></p>
+                    <p><a href="#">Refund Policy</a></p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #333; padding-top: 1rem; margin-top: 2rem;">
+                <p>&copy; 2025 AnimalConnect. All rights reserved. | Made with 🧡 for India's animal community</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample animal data
+        const animals = [
+            {
+                id: 1,
+                name: "Premium Jersey Cow",
+                price: "₹85,000",
+                category: "dairy",
+                image: "🐄",
+                location: "Pune, Maharashtra",
+                age: "3 years",
+                breed: "Jersey Cross",
+                milkYield: "18L/day",
+                seller: "Ramesh Patil",
+                phone: "+91 98765 43210",
+                badges: ["verified", "premium"],
+                rating: 4.8,
+                reviews: 23,
+                description: "Excellent milk producing Jersey cow with consistent 18L daily yield. Vaccinated, healthy, and well-maintained."
+            },
+            {
+                id: 2,
+                name: "Healthy Goat Pair",
+                price: "₹12,000",
+                category: "goats",
+                image: "🐐",
+                location: "Nashik, Maharashtra",
+                age: "2 years",
+                breed: "Boer Cross",
+                weight: "45kg each",
+                seller: "Suresh Jadhav",
+                phone: "+91 87654 32109",
+                badges: ["verified", "new"],
+                rating: 4.6,
+                reviews: 15,
+                description: "Healthy breeding pair of Boer cross goats. Perfect for meat production and breeding purposes."
+            },
+            {
+                id: 3,
+                name: "Murrah Buffalo",
+                price: "₹95,000",
+                category: "buffaloes",
+                image: "🐃",
+                location: "Hisar, Haryana",
+                age: "4 years",
+                breed: "Murrah",
+                milkYield: "12L/day",
+                seller: "Vinod Kumar",
+                phone: "+91 76543 21098",
+                badges: ["verified", "premium"],
+                rating: 4.9,
+                reviews: 31,
+                description: "Pure Murrah buffalo with excellent milk production. Disease-free with complete vaccination records."
+            },
+            {
+                id: 4,
+                name: "Broiler Chickens (50 pcs)",
+                price: "₹8,500",
+                category: "poultry",
+                image: "🐔",
+                location: "Coimbatore, Tamil Nadu",
+                age: "6 weeks",
+                breed: "Broiler",
+                weight: "1.5kg avg",
+                seller: "Krishnan Pillai",
+                phone: "+91 65432 10987",
+                badges: ["verified"],
+                rating: 4.4,
+                reviews: 12,
+                description: "Healthy broiler chickens ready for market. Vaccinated and maintained in hygienic conditions."
+            },
+            {
+                id: 5,
+                name: "Labrador Puppy",
+                price: "₹15,000",
+                category: "pets",
+                image: "🐕",
+                location: "Bangalore, Karnataka",
+                age: "8 weeks",
+                breed: "Labrador",
+                color: "Golden",
+                seller: "Priya Sharma",
+                phone: "+91 54321 09876",
+                badges: ["verified", "new"],
+                rating: 4.7,
+                reviews: 18,
+                description: "Adorable Labrador puppy with vaccination certificate. Perfect family pet with friendly temperament."
+            },
+            {
+                id: 6,
+                name: "Sahiwal Cow",
+                price: "₹75,000",
+                category: "dairy",
+                image: "🐄",
+                location: "Jaipur, Rajasthan",
+                age: "3.5 years",
+                breed: "Sahiwal",
+                milkYield: "15L/day",
+                seller: "Mohan Sharma",
+                phone: "+91 43210 98765",
+                badges: ["verified"],
+                rating: 4.5,
+                reviews: 19,
+                description: "Indigenous Sahiwal cow with excellent heat tolerance. Consistent milk production and healthy condition."
+            }
+        ];
+
+        // Populate animal grid
+        function populateAnimalGrid(animalList = animals) {
+            const grid = document.getElementById('animalGrid');
+            grid.innerHTML = '';
+            
+            animalList.forEach(animal => {
+                const card = document.createElement('div');
+                card.className = 'animal-card fade-in';
+                card.innerHTML = `
+                    <div class="animal-image">${animal.image}</div>
+                    <div class="animal-info">
+                        <div class="animal-name">${animal.name}</div>
+                        <div class="animal-price">${animal.price}</div>
+                        <div class="animal-badges">
+                            ${animal.badges.map(badge => `<span class="badge badge-${badge}">${badge}</span>`).join('')}
+                        </div>
+                        <div class="animal-details">
+                            <strong>Age:</strong> ${animal.age} | <strong>Breed:</strong> ${animal.breed}
+                        </div>
+                        <div class="animal-location">📍 ${animal.location}</div>
+                        <div style="margin-bottom: 1rem;">
+                            <span style="color: #ffd700;">★</span> ${animal.rating} (${animal.reviews} reviews)
+                        </div>
+                        <button class="btn btn-primary" onclick="showAnimalDetails(${animal.id})">View Details</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-select').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-select').forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                let filtered = animals;
+                
+                if (category !== 'all') {
+                    filtered = animals.filter(animal => animal.category === category);
+                }
+                
+                populateAnimalGrid(filtered);
+            });
+        });
+
+        // Show animal details in modal
+        function showAnimalDetails(animalId) {
+            const animal = animals.find(a => a.id === animalId);
+            const modal = document.getElementById('animalModal');
+            const details = document.getElementById('animalDetails');
+            
+            details.innerHTML = `
+                <div class="animal-detail-image">${animal.image}</div>
+                <h2>${animal.name}</h2>
+                <div class="animal-price" style="font-size: 2rem; margin-bottom: 1rem;">${animal.price}</div>
+                <div class="animal-badges" style="margin-bottom: 1rem;">
+                    ${animal.badges.map(badge => `<span class="badge badge-${badge}">${badge}</span>`).join('')}
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <span style="color: #ffd700;">★</span> ${animal.rating} (${animal.reviews} reviews)
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>📍 Location:</strong> ${animal.location}<br>
+                    <strong>🎂 Age:</strong> ${animal.age}<br>
+                    <strong>🧬 Breed:</strong> ${animal.breed}<br>
+                    ${animal.milkYield ? `<strong>🥛 Milk Yield:</strong> ${animal.milkYield}<br>` : ''}
+                    ${animal.weight ? `<strong>⚖️ Weight:</strong> ${animal.weight}<br>` : ''}
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <strong>📝 Description:</strong><br>
+                    ${animal.description}
+                </div>
+                <div class="contact-info">
+                    <strong>💰 Ready to buy?</strong><br>
+                    Pay ₹10 to get seller contact details and connect directly!
+                </div>
+                <button class="btn btn-primary" onclick="unlockContact(${animalId})">Unlock Contact Details (₹10)</button>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        // Unlock contact details
+        function unlockContact(animalId) {
+            const animal = animals.find(a => a.id === animalId);
+            
+            // Simulate payment process
+            alert(`🎉 Payment successful! Contact details unlocked:
+
+${animal.seller}
+📱 ${animal.phone}
+📧 ${animal.seller.toLowerCase().replace(' ', '.')}@gmail.com
+💬 WhatsApp: Available
+⏰ Best time: 9 AM - 7 PM
+
+Thank you for using AnimalConnect!`);
+        }
+
+        // Show onboarding modal
+        function showOnboardingModal(type) {
+            const modal = document.getElementById('onboardingModal');
+            const form = document.getElementById('onboardingForm');
+            
+            const title = type === 'buyer' ? 'Join as Buyer' : 'Join as Seller';
+            const description = type === 'buyer' ? 
+                'Start browsing and buying animals from verified sellers' : 
+                'Start selling your animals to buyers across India';
+            
+            form.innerHTML = `
+                <h2>${title}</h2>
+                <p>${description}</p>
+                <form id="registrationForm">
+                    <div style="margin-bottom: 1rem;">
+                        <label>Full Name:</label>
+                        <input type="text" required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Phone Number:</label>
+                        <input type="tel" required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Email:</label>
+                        <input type="email" required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>Location:</label>
+                        <input type="text" required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
+                    </div>
+                    ${type === 'seller' ? `
+                        <div style="margin-bottom: 1rem;">
+                            <label>Type of Animals:</label>
+                            <select required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
+                                <option value="">Select type</option>
+                                <option value="dairy">Dairy Cattle</option>
+                                <option value="goats">Goats</option>
+                                <option value="buffaloes">Buffaloes</option>
+                                <option value="poultry">Poultry</option>
+                                <option value="pets">Pets</option>
+                            </select>
+                        </div>
+                    ` : ''}
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                </form>
+            `;
+            
+            modal.style.display = 'block';
+            
+            // Handle form submission
+            document.getElementById('registrationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('🎉 Registration successful! Welcome to AnimalConnect!');
+                modal.style.display = 'none';
+            });
+        }
+
+        // Modal close functionality
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const query = document.querySelector('.search-input').value.toLowerCase();
+            const filtered = animals.filter(animal => 
+                animal.name.toLowerCase().includes(query) ||
+                animal.breed.toLowerCase().includes(query) ||
+                animal.location.toLowerCase().includes(query)
+            );
+            populateAnimalGrid(filtered);
+        });
+
+        // Search on enter key
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            populateAnimalGrid();
+        });
+    </script>
+</body>
+</html>
